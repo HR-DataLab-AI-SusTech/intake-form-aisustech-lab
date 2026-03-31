@@ -1,0 +1,22 @@
+{
+  "name": "datalab-intake-form",
+  "version": "1.0.0",
+  "description": "Multi-step intake form for HR Datalab data science project requests",
+  "private": true,
+  "scripts": {
+    "lint:js": "eslint src/js/",
+    "lint:css": "stylelint \"src/css/**/*.css\"",
+    "lint:html": "htmlhint \"src/**/*.html\"",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "format": "prettier --write \"src/**/*.{html,css,js}\"",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "stylelint": "^16.3.0",
+    "stylelint-config-standard": "^36.0.0",
+    "htmlhint": "^1.1.4",
+    "prettier": "^3.2.0"
+  }
+}

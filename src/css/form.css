@@ -1,0 +1,372 @@
+.form-page {
+  animation: page-reveal var(--transition-normal) both;
+}
+
+@keyframes page-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.6;
+}
+
+.page-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--color-secondary);
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+  border-radius: 2px;
+}
+
+/* Fields */
+.form-field {
+  margin-bottom: var(--spacing-2xl);
+  animation: field-stagger var(--transition-normal) both;
+}
+
+.form-field:nth-child(2) { animation-delay: 50ms; }
+.form-field:nth-child(3) { animation-delay: 100ms; }
+.form-field:nth-child(4) { animation-delay: 150ms; }
+.form-field:nth-child(5) { animation-delay: 200ms; }
+
+@keyframes field-stagger {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Labels */
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+.form-label .question-number {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-right: var(--spacing-sm);
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+}
+
+.required-marker {
+  color: var(--color-secondary);
+  margin-left: var(--spacing-xs);
+  font-weight: 600;
+}
+
+/* Field subtitle */
+.field-subtitle {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.5;
+}
+
+/* Help text & info links */
+.help-text {
+  display: block;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-sm);
+}
+
+.info-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary);
+  text-decoration: none;
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.info-link:hover {
+  color: var(--color-secondary-hover);
+  border-bottom-color: var(--color-secondary);
+}
+
+/* Text inputs & textareas */
+.form-textarea,
+.form-input {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-bg);
+  font-size: var(--font-size-base);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+  outline: none;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 130px;
+  line-height: 1.7;
+}
+
+.form-textarea::placeholder,
+.form-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}
+
+.form-textarea:hover,
+.form-input:hover {
+  border-color: var(--color-primary-light);
+}
+
+.form-textarea:focus,
+.form-input:focus {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+  box-shadow: 0 0 0 4px rgb(10 48 73 / 8%);
+}
+
+/* Error states */
+.form-textarea.field-error,
+.form-input.field-error {
+  border-color: var(--color-error);
+  background-color: var(--color-error-light);
+}
+
+.form-textarea.field-error:focus,
+.form-input.field-error:focus {
+  box-shadow: 0 0 0 4px rgb(155 39 67 / 10%);
+}
+
+/* Radio groups */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+  background: var(--color-bg);
+}
+
+.radio-option:hover {
+  border-color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+.radio-option input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color var(--transition-fast);
+}
+
+.radio-option input[type="radio"]::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  transform: scale(0);
+  transition: transform var(--transition-fast);
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: var(--color-primary);
+}
+
+.radio-option input[type="radio"]:checked::after {
+  transform: scale(1);
+}
+
+.radio-option.selected {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.radio-group.field-error .radio-option {
+  border-color: var(--color-error);
+}
+
+/* Checkbox groups */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+  background: var(--color-bg);
+}
+
+.checkbox-option:hover {
+  border-color: var(--color-primary);
+  transform: translateX(4px);
+}
+
+.checkbox-option input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.checkbox-option input[type="checkbox"]:checked {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.checkbox-option input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--color-surface);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-option.selected {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.checkbox-group.field-error .checkbox-option {
+  border-color: var(--color-error);
+}
+
+/* Select dropdown */
+.form-select {
+  width: 100%;
+  padding: var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-bg);
+  font-size: var(--font-size-base);
+  outline: none;
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.form-select:hover {
+  border-color: var(--color-primary-light);
+}
+
+.form-select:focus {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+  box-shadow: 0 0 0 4px rgb(10 48 73 / 8%);
+}
+
+.form-select.field-error {
+  border-color: var(--color-error);
+  background-color: var(--color-error-light);
+}
+
+/* Error messages */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-error);
+  margin-top: var(--spacing-sm);
+  font-weight: 500;
+}
+
+.error-message::before {
+  content: '!';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-error);
+  color: var(--color-surface);
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}

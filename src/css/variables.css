@@ -1,0 +1,59 @@
+:root {
+  /* Colors — Hogeschool Rotterdam editorial palette */
+  --color-primary: #0a3049;
+  --color-primary-hover: #072336;
+  --color-primary-light: #e0eaf0;
+  --color-secondary: #9b2743;
+  --color-secondary-hover: #832136;
+  --color-secondary-light: #f5e1e6;
+  --color-success: #5a8a3c;
+  --color-success-hover: #4a7730;
+  --color-success-light: #eaf3e3;
+  --color-error: #9b2743;
+  --color-error-light: #f5e1e6;
+  --color-bg: #f7f4ef;
+  --color-bg-warm: #efe9df;
+  --color-surface: #fff;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b6560;
+  --color-text-inverse: #f7f4ef;
+  --color-border: #d9d3ca;
+  --color-border-focus: #0a3049;
+
+  /* Typography */
+  --font-display: 'DM Serif Display', georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.75rem;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* Layout */
+  --container-max-width: 760px;
+  --border-radius: 12px;
+  --border-radius-sm: 6px;
+  --border-radius-lg: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgb(10 48 73 / 6%);
+  --shadow-md: 0 4px 16px rgb(10 48 73 / 8%);
+  --shadow-lg: 0 12px 40px rgb(10 48 73 / 12%);
+  --shadow-card: 0 8px 30px rgb(10 48 73 / 8%), 0 1px 3px rgb(10 48 73 / 4%);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datalab Intake Form</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/summary.css">
+  <link rel="stylesheet" href="css/utilities.css">
+</head>
+<body>
+  <div class="page-grain"></div>
+
+  <header>
+    <div class="container header-content">
+      <div class="header-brand">
+        <div class="header-logo">
+          <span class="logo-mark">DL</span>
+        </div>
+        <div>
+          <h1 class="header-title">Datalab Intake</h1>
+          <p class="header-subtitle">Project intake for Data Science use-cases</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <nav id="step-indicator" class="step-indicator" aria-label="Form progress"></nav>
+
+      <div class="form-card">
+        <div id="form-container"></div>
+
+        <div id="form-navigation" class="form-navigation">
+          <button id="btn-prev" class="btn btn-secondary" type="button" aria-label="Previous page">
+            &#8592; Previous
+          </button>
+          <span id="page-counter" class="page-counter"></span>
+          <button id="btn-next" class="btn btn-primary" type="button" aria-label="Next page">
+            Next &#8594;
+          </button>
+        </div>
+      </div>
+
+      <div id="validation-live" class="visually-hidden" aria-live="polite" role="status"></div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>HR Datalab &mdash; Data Science Project Intake</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
