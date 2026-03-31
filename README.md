@@ -1,10 +1,10 @@
-# Datalab Intake Form
+# AI SusTech Datalab Intake Form
 
-A config-driven, multi-step intake form for the HR Datalab. Collects data science project requests through a guided questionnaire and exports the results as a downloadable Markdown file.
+A config-driven, multi-step intake form for the AI SusTech Datalab. Collects data & AI project requests through a guided questionnaire and exports the results as Markdown or CSV.
 
 No database, no backend — just static HTML/CSS/JS served via Docker.
 
-![Datalab Intake Form](docs/frontpage_screenhot.jpeg)
+![AI SusTech Datalab Intake Form](docs/frontpage_screenhot.jpeg)
 
 ## Quick Start
 
@@ -27,89 +27,78 @@ docker compose down
 Serve the `src/` directory with any static file server:
 
 ```bash
-# Using Python
-python3 -m http.server 8080 --directory src
-
-# Using Node.js (npx)
 npx serve src -l 8080
 ```
 
 ## How It Works
 
-1. The user navigates through 7 form pages, filling in questions about their data science project
-2. Page 7 shows a summary of all answers with "Edit" links to go back
-3. Clicking "Download as Markdown" generates a `.md` file with all answers
-4. Form state is persisted in `sessionStorage` — refreshing the page won't lose data
+1. A **landing page** introduces the form with an overview of the sections and estimated time
+2. The user navigates through 6 question pages covering use-case, regulations, data, and tech stack
+3. The **summary page** shows all answers with "Edit" links to jump back to any section
+4. Download the completed intake as **Markdown** or **CSV**
+5. A **Start Over** button clears all answers to begin fresh
+6. Form state is persisted in `sessionStorage` — refreshing the page won't lose data
+7. Browser **back/forward buttons** work — each page gets a readable URL hash (e.g. `#use-case-description`)
 
-## Generated Markdown Output
+## Download Formats
 
-The downloaded file (`datalab-intake-YYYY-MM-DD.md`) is a structured Markdown document with all answers organized by section. Here's what the output looks like:
+### Markdown
+
+The downloaded file (`aisustech-datalab-intake-YYYY-MM-DD.md`) is a structured document:
 
 ```markdown
-# Datalab Intake Form
+# AI SusTech Datalab Intake Form
 
-> Project intake for Data Science use-cases
+> Project intake for data & AI projects
 
 **Generated:** 2026-03-31
 
 ---
 
-## 1. Description of the Data Science Use-Case
+## 1. Description of the Use-Case
 
 *Help us understand the project you have in mind.*
 
-### Q1: Describe the data science use-case in a popular summary.
+### Q1: Describe the use-case in a popular summary.
 
 *Write a brief, accessible summary that a non-technical person could understand.*
 
 We want to predict patient readmission rates using historical hospital data
 to improve discharge planning and reduce unnecessary readmissions.
 
-### Q2: What is the background of the problem?
-
-*Describe the context and why this problem matters.*
-
-Currently 15% of patients are readmitted within 30 days. Each readmission
-costs an average of EUR 5,000 and impacts patient outcomes negatively.
-
 ---
 
 ## 2. Management and Regulations
-
-*Legal and ethical considerations for your project.*
 
 ### Q5: Is there Medical Ethics Review Committee (METC) approval?
 
 Yes
 
-### Q6: Does the project involve privacy-sensitive data under the GDPR?
-
-Yes
-
 ---
-
 ...
 ```
 
-### Output structure
+### CSV
 
-- The **form title** and **subtitle** become the document heading and quote block
-- Each **page** becomes an `## h2` section with auto-numbering
-- Page and field **subtitles** are rendered in *italics* as context
-- Each **field** becomes an `### h3` heading with the question ID and label
-- **Checkbox** fields are rendered as a bullet list (`- item`)
-- Empty fields show `*No answer provided*`
-- Sections are separated by `---` horizontal rules
+The CSV export produces a spreadsheet-friendly file with columns:
+
+| Section | Question ID | Question | Answer |
+|---|---|---|---|
+| Description of the Use-Case | Q1 | Describe the use-case... | We want to predict... |
+| Management and Regulations | Q5 | Is there METC approval? | Yes |
+
+CSV fields are escaped to prevent Excel formula injection.
 
 ### Filename
 
-The filename is configurable via `downloadFilenamePrefix` in `formConfig.js`:
+Configurable via `downloadFilenamePrefix` in `formConfig.json`:
 
 ```
-{downloadFilenamePrefix}-YYYY-MM-DD.md
+{prefix}-YYYY-MM-DD.md
+{prefix}-YYYY-MM-DD.csv
 ```
 
-Default: `datalab-intake-2026-03-31.md`
+Default: `aisustech-datalab-intake-2026-03-31.md`
 
 ## Configuring the Form
 
@@ -125,11 +114,26 @@ Edit this file to add, remove, or change questions. No other file needs to chang
 
 ```json
 {
-  "title": "Datalab Intake Form",
-  "subtitle": "Project intake for ...",
-  "downloadFilenamePrefix": "datalab-intake",
+  "title": "AI SusTech Datalab Intake Form",
+  "subtitle": "Project intake for data & AI projects",
+  "downloadFilenamePrefix": "aisustech-datalab-intake",
+  "nextButtonText": "Next",
+  "prevButtonText": "Previous",
 
   "pages": [
+    {
+      "id": "landing",
+      "isLanding": true,
+      "title": "Welcome to the AI SusTech Datalab",
+      "subtitle": "Tell us about your data project",
+      "description": "This form helps us understand your project needs...",
+      "features": [
+        { "icon": "01", "title": "Project Description", "text": "Describe your problem" }
+      ],
+      "startButtonText": "Start the Intake Form",
+      "estimatedTime": "5–10 minutes",
+      "fields": []
+    },
     {
       "id": "my-page",
       "title": "Page Heading",
@@ -145,11 +149,20 @@ Edit this file to add, remove, or change questions. No other file needs to chang
       "emptyFieldText": "No answer provided",
       "downloadInstructions": "Review your answers above, then download...",
       "downloadButtonText": "Download as Markdown",
+      "startOverButtonText": "Start Over",
       "fields": []
     }
   ]
 }
 ```
+
+### Page Types
+
+| Type | Property | Description |
+|---|---|---|
+| **Landing** | `"isLanding": true` | Welcome page with description, feature cards, and CTA button. Must be the first page. |
+| **Form** | (default) | Question page with fields. Requires validation before advancing. |
+| **Summary** | `"isSummary": true` | Read-only review with download buttons and Start Over. Must be the last page. |
 
 ### Field Types
 
@@ -226,31 +239,24 @@ Edit this file to add, remove, or change questions. No other file needs to chang
 | `placeholder` | text, textarea, select | Placeholder text inside the input |
 | `required` | All types | If `true`, the user must answer before advancing |
 | `rows` | textarea | Number of visible rows (default: 4) |
-| `infoLink` | All types | External reference link (see below) |
+| `infoLink` | All types | External reference link `{ "url": "...", "text": "..." }` |
 
-### Adding Reference Links
+### Landing Page Features
 
-Any field can include an external link for more information:
+The landing page `features` array renders as cards in a 2x2 grid:
 
 ```json
-{
-  "id": "gdpr",
-  "type": "radio",
-  "label": "Does the project involve GDPR-sensitive data?",
-  "infoLink": {
-    "url": "https://example.com/gdpr-info",
-    "text": "More about GDPR"
-  },
-  "options": ["Yes", "No", "Not sure"],
-  "required": true
-}
+"features": [
+  { "icon": "01", "title": "Project Description", "text": "Describe your data problem" },
+  { "icon": "02", "title": "Regulations", "text": "METC, GDPR, NDA requirements" }
+]
 ```
 
 ### Examples
 
 #### Adding a new page
 
-Add a new object to the `pages` array (before the summary page):
+Add a new object to the `pages` array (between form pages and the summary page):
 
 ```json
 {
@@ -267,13 +273,6 @@ Add a new object to the `pages` array (before the summary page):
     },
     {
       "id": "q14",
-      "type": "text",
-      "label": "Contact email",
-      "placeholder": "name@example.com",
-      "required": true
-    },
-    {
-      "id": "q15",
       "type": "select",
       "label": "Which department?",
       "options": ["Research", "Engineering", "Clinical", "Operations", "Other"],
@@ -336,12 +335,15 @@ src/
   index.html                        # Single-page HTML shell
   config/
     formConfig.json                  # All form content as JSON (edit this!)
+  assets/
+    favicon.svg                     # SVG favicon (AI monogram)
   css/
     reset.css                       # CSS reset
     variables.css                   # Design tokens (colors, fonts, spacing)
     layout.css                      # Page structure (header, main, footer)
     form.css                        # Form elements (inputs, radios, checkboxes, selects)
     navigation.css                  # Step indicator and nav buttons
+    landing.css                     # Landing/welcome page
     summary.css                     # Summary/review page and download section
     utilities.css                   # Helpers (hidden, sr-only, reduced-motion)
   js/
@@ -350,26 +352,30 @@ src/
       formConfig.js                 # Fetches and exposes the JSON config
     modules/
       formRenderer.js               # Reads config, builds DOM for each page
-      navigation.js                 # Page switching, step indicator, prev/next
+      landingRenderer.js            # Landing page with hero, features, CTA
+      navigation.js                 # Page switching, step indicator, history API
       validation.js                 # Per-page required field checks
       stateManager.js               # In-memory + sessionStorage answer store
       markdownGenerator.js          # Converts answers to formatted Markdown
+      csvGenerator.js               # Converts answers to CSV with formula protection
       downloadHandler.js            # Creates Blob and triggers file download
-      summaryRenderer.js            # Read-only review page with edit links
+      summaryRenderer.js            # Review page with download + start over
       pageController.js             # Decoupled page navigation (avoids circular deps)
 docker/
-  Dockerfile                        # nginx:alpine image
+  Dockerfile                        # nginx:alpine — works standalone or with compose
   nginx.conf                        # Static file serving config
 docker-compose.yml                  # Mounts src/ as volume on port 8080
 ```
 
 ## Architecture Decisions
 
-- **Config-driven rendering** — All questions, options, labels, and help text live in `formConfig.js`. The renderer reads this config and builds the DOM dynamically. Adding a question means editing one file.
-- **No build step** — Uses native ES modules (`<script type="module">`). No bundler, no transpiler. Modern browsers handle this natively.
-- **No database** — Form state lives in `sessionStorage` (survives page refresh, cleared when the tab closes). The deliverable is the downloaded Markdown file.
+- **Config-driven rendering** — All questions, options, labels, and UI text live in `formConfig.json`. The renderer reads this config and builds the DOM dynamically. Adding a question means editing one file.
+- **No build step** — Uses native ES modules (`<script type="module">`). No bundler, no transpiler.
+- **No database** — Form state lives in `sessionStorage` (survives page refresh, cleared when the tab closes). The deliverable is the downloaded file.
+- **Browser history** — Each page pushes a readable hash to the URL (e.g. `#use-case-description`). Back/forward buttons work. Direct links to specific pages work.
+- **Step validation** — Users can only navigate to pages they've already visited via the step indicator. The Next button validates required fields before advancing.
 - **CSS custom properties** — All colors, fonts, and spacing are defined as variables in `variables.css`. Rebranding requires editing only that file.
-- **Modular CSS** — Separate stylesheets by concern (layout, form, navigation, summary) to keep things maintainable.
+- **Accessibility** — ARIA labels, `aria-describedby` on error fields, visually-hidden fieldset legends, `prefers-reduced-motion` support, keyboard-navigable step indicator.
 
 ## Theming
 

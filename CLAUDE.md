@@ -1,34 +1,56 @@
-# Project: Datalab Intake Form
+# Project: AI SusTech Datalab Intake Form
 
-## Frontend Design Skill
+## Overview
 
-This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics. Implement real working code with exceptional attention to aesthetic details and creative choices.
+Config-driven multi-step intake form for the AI SusTech Datalab. Vanilla HTML/CSS/JS, no framework, no build step. Served via Docker (nginx). Form content is defined in `src/config/formConfig.json`.
 
-### Design Thinking
+## Key Commands
 
-Before coding, understand the context and commit to a BOLD aesthetic direction:
-- **Purpose**: What problem does this interface solve? Who uses it?
-- **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc.
-- **Constraints**: Technical requirements (framework, performance, accessibility).
-- **Differentiation**: What makes this UNFORGETTABLE? What's the one thing someone will remember?
+```bash
+npm run lint          # ESLint + Stylelint + HTMLHint
+npm run format        # Prettier
+docker compose up     # Serve on localhost:8080
+```
 
-**CRITICAL**: Choose a clear conceptual direction and execute it with precision. Bold maximalism and refined minimalism both work - the key is intentionality, not intensity.
+## Architecture
 
-### Frontend Aesthetics Guidelines
+- `src/config/formConfig.json` — single source of truth for all form content (pages, questions, UI text)
+- `src/js/config/formConfig.js` — fetches JSON, exposes `getFormConfig()`
+- `src/js/modules/` — one module per concern (renderer, navigation, validation, state, export, download)
+- `src/css/variables.css` — all design tokens (colors, fonts, spacing)
+- Page types: landing (`isLanding`), form (default), summary (`isSummary`)
+- State lives in `sessionStorage` via `stateManager.js`
+- Browser history via `pushState` with page ID hashes
 
-Focus on:
-- **Typography**: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics; unexpected, characterful font choices. Pair a distinctive display font with a refined body font.
-- **Color & Theme**: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes.
-- **Motion**: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions.
-- **Spatial Composition**: Unexpected layouts. Asymmetry. Overlap. Diagonal flow. Grid-breaking elements. Generous negative space OR controlled density.
-- **Backgrounds & Visual Details**: Create atmosphere and depth rather than defaulting to solid colors. Add contextual effects and textures that match the overall aesthetic.
+## Brand: Hogeschool Rotterdam / AI SusTech Datalab
 
-NEVER use generic AI-generated aesthetics like overused font families (Inter, Roboto, Arial, system fonts), cliched color schemes, predictable layouts and component patterns, and cookie-cutter design.
-
-## Brand: Hogeschool Rotterdam
 - Dark teal/petrol: #0a3049 (header, primary)
 - Deep burgundy/rose: #9b2743 (accent, cards)
 - Muted green: #5a8a3c (CTA, success)
 - Warm cream: #f7f4ef (background)
 - Sand borders: #d9d3ca
-- Font: Poppins
+- Display font: DM Serif Display
+- Body font: DM Sans
+
+## Frontend Design Skill
+
+This skill guides creation of distinctive, production-grade frontend interfaces that avoid generic "AI slop" aesthetics.
+
+### Design Direction: Editorial/Magazine
+
+The current design uses an editorial aesthetic with:
+- Serif + sans-serif font pairing (DM Serif Display + DM Sans)
+- Dominant dark teal with burgundy accents
+- Warm cream backgrounds with subtle grain texture
+- Staggered animations on page transitions
+- Strong typographic hierarchy with decorative underlines
+
+### Guidelines
+
+- **Typography**: Distinctive font pairings. Never default to Arial, Inter, or system fonts.
+- **Color**: Dominant color with sharp accents. Use CSS variables.
+- **Motion**: Staggered reveals on page load. CSS-only where possible.
+- **Spatial**: Generous whitespace. Card-based layout with shadows and rounded corners.
+- **Details**: Grain overlay, decorative accent bars, hover micro-interactions.
+
+NEVER use generic AI aesthetics: overused fonts, purple gradients, predictable layouts, cookie-cutter patterns.
