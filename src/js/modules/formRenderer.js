@@ -38,7 +38,12 @@ function renderField(field) {
   const label = document.createElement('label');
   label.className = 'form-label';
   label.setAttribute('for', field.id);
-  label.innerHTML = `<span class="question-number">${field.id.toUpperCase()}</span> ${escapeHtml(field.label)}`;
+
+  const qNum = document.createElement('span');
+  qNum.className = 'question-number';
+  qNum.textContent = field.id.toUpperCase();
+  label.appendChild(qNum);
+  label.appendChild(document.createTextNode(` ${field.label}`));
 
   if (field.required) {
     const marker = document.createElement('span');
@@ -139,6 +144,11 @@ function renderRadioGroup(field) {
   group.setAttribute('role', 'radiogroup');
   group.setAttribute('aria-required', field.required ? 'true' : 'false');
 
+  const legend = document.createElement('legend');
+  legend.className = 'visually-hidden';
+  legend.textContent = field.label;
+  group.appendChild(legend);
+
   const currentValue = getValue(field.id);
 
   for (const option of field.options) {
@@ -177,6 +187,11 @@ function renderCheckboxGroup(field) {
   group.className = 'checkbox-group';
   group.id = `${field.id}-group`;
   group.setAttribute('aria-required', field.required ? 'true' : 'false');
+
+  const legend = document.createElement('legend');
+  legend.className = 'visually-hidden';
+  legend.textContent = field.label;
+  group.appendChild(legend);
 
   const currentValue = getValue(field.id);
   let selectedValues = [];
@@ -274,8 +289,3 @@ function clearFieldError(fieldId) {
   }
 }
 
-function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}

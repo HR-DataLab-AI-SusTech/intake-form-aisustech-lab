@@ -1,7 +1,8 @@
 import { getFormConfig } from '../config/formConfig.js';
-import { getValue } from './stateManager.js';
+import { getValue, clearState } from './stateManager.js';
 import { generateMarkdown } from './markdownGenerator.js';
-import { downloadMarkdown } from './downloadHandler.js';
+import { generateCsv } from './csvGenerator.js';
+import { downloadMarkdown, downloadCsv } from './downloadHandler.js';
 import { goToPage } from './pageController.js';
 
 function getSummaryPage() {
@@ -26,7 +27,7 @@ export function renderSummary(container) {
   let pageIndex = 0;
 
   for (const page of formConfig.pages) {
-    if (page.isSummary) {
+    if (page.isSummary || page.isLanding) {
       continue;
     }
 
@@ -80,42 +81,76 @@ export function renderSummary(container) {
     pageIndex++;
   }
 
+  // Download section
   const downloadSection = document.createElement('div');
   downloadSection.className = 'download-section';
 
   const downloadText = document.createElement('p');
   downloadText.textContent =
     summaryPage.downloadInstructions ||
-    'Review your answers above, then download the form as a Markdown file.';
-
-  const downloadBtn = document.createElement('button');
-  downloadBtn.className = 'btn btn-success';
-  downloadBtn.textContent = summaryPage.downloadButtonText || 'Download as Markdown';
-  downloadBtn.setAttribute('aria-label', 'Download form as Markdown file');
-
-  downloadBtn.addEventListener('click', () => {
-    downloadBtn.disabled = true;
-    downloadBtn.textContent = 'Downloading...';
-    try {
-      const md = generateMarkdown();
-      downloadMarkdown(md, formConfig.downloadFilenamePrefix);
-      downloadBtn.textContent = 'Downloaded!';
-      setTimeout(() => {
-        downloadBtn.disabled = false;
-        downloadBtn.textContent = summaryPage.downloadButtonText || 'Download as Markdown';
-      }, 2000);
-    } catch {
-      downloadBtn.disabled = false;
-      downloadBtn.textContent = summaryPage.downloadButtonText || 'Download as Markdown';
-    }
-  });
+    'Review your answers above, then download the form.';
 
   downloadSection.appendChild(downloadText);
-  downloadSection.appendChild(downloadBtn);
+
+  const btnGroup = document.createElement('div');
+  btnGroup.className = 'download-btn-group';
+
+  btnGroup.appendChild(
+    createDownloadButton('Markdown', 'btn-success', () => {
+      const md = generateMarkdown();
+      downloadMarkdown(md);
+    }),
+  );
+
+  btnGroup.appendChild(
+    createDownloadButton('CSV', 'btn-secondary-light', () => {
+      const csv = generateCsv();
+      downloadCsv(csv);
+    }),
+  );
+
+  downloadSection.appendChild(btnGroup);
+
+  const startOverBtn = document.createElement('button');
+  startOverBtn.className = 'btn btn-secondary start-over-btn';
+  startOverBtn.textContent = summaryPage.startOverButtonText || 'Start Over';
+  startOverBtn.setAttribute('aria-label', 'Clear all answers and start over');
+  startOverBtn.addEventListener('click', () => {
+    clearState();
+    goToPage(0);
+  });
+  downloadSection.appendChild(startOverBtn);
+
   section.appendChild(downloadSection);
 
   container.appendChild(section);
   title.focus();
+}
+
+function createDownloadButton(label, cssClass, onClick) {
+  const btn = document.createElement('button');
+  btn.className = `btn ${cssClass}`;
+  btn.textContent = `Download ${label}`;
+  btn.setAttribute('aria-label', `Download form as ${label} file`);
+
+  btn.addEventListener('click', () => {
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = 'Downloading...';
+    try {
+      onClick();
+      btn.textContent = 'Downloaded!';
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }, 2000);
+    } catch {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+
+  return btn;
 }
 
 function formatDisplayValue(field, value) {

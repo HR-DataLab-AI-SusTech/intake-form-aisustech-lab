@@ -1,18 +1,36 @@
 {
-  "title": "Datalab Intake Form",
-  "subtitle": "Project intake for Data Science use-cases",
-  "downloadFilenamePrefix": "datalab-intake",
+  "title": "AI SusTech Datalab Intake Form",
+  "subtitle": "Project intake for data & AI projects",
+  "downloadFilenamePrefix": "aisustech-datalab-intake",
+  "nextButtonText": "Next",
+  "prevButtonText": "Previous",
 
   "pages": [
     {
+      "id": "landing",
+      "isLanding": true,
+      "title": "Welcome to the AI SusTech Datalab",
+      "subtitle": "Tell us about your data project",
+      "description": "This form helps us understand your project needs so our AI SusTech Datalab team can provide the right support. You'll be guided through a series of questions covering your use-case, regulatory requirements, data availability, and technical stack.",
+      "features": [
+        { "icon": "01", "title": "Project Description", "text": "Describe your data problem and desired outcome" },
+        { "icon": "02", "title": "Regulations & Compliance", "text": "METC, GDPR, NDA, and data transfer requirements" },
+        { "icon": "03", "title": "Data & Technology", "text": "Data availability, format, management, and tech stack" },
+        { "icon": "04", "title": "Download Report", "text": "Get your completed intake as Markdown or CSV" }
+      ],
+      "startButtonText": "Start the Intake Form",
+      "estimatedTime": "5\u201310 minutes",
+      "fields": []
+    },
+    {
       "id": "use-case-description",
-      "title": "Description of the Data Science Use-Case",
+      "title": "Description of the Use-Case",
       "subtitle": "Help us understand the project you have in mind.",
       "fields": [
         {
           "id": "q1",
           "type": "textarea",
-          "label": "Describe the data science use-case in a popular summary.",
+          "label": "Describe the use-case in a popular summary.",
           "subtitle": "Write a brief, accessible summary that a non-technical person could understand.",
           "required": true,
           "rows": 5
@@ -141,14 +159,14 @@
     },
     {
       "id": "data-science-stack",
-      "title": "Data Science Stack",
+      "title": "Technical Stack",
       "subtitle": "Help us understand your current technical landscape.",
       "fields": [
         {
           "id": "q12",
           "type": "textarea",
-          "label": "Which elements of the data science stack have already been used? Why is data science needed for this project?",
-          "subtitle": "E.g. data collection, cleaning, analysis, visualization, machine learning, deployment.",
+          "label": "Which elements of the data/AI stack have already been used? Why is support from the Datalab needed for this project?",
+          "subtitle": "E.g. data collection, cleaning, analysis, visualization, machine learning, AI, deployment.",
           "required": true,
           "rows": 6
         }
@@ -161,8 +179,9 @@
       "summaryPageTitle": "Review Your Answers",
       "editButtonText": "Edit",
       "emptyFieldText": "No answer provided",
-      "downloadInstructions": "Review your answers above, then download the form as a Markdown file.",
+      "downloadInstructions": "Review your answers above, then download the form as Markdown or CSV.",
       "downloadButtonText": "Download as Markdown",
+      "startOverButtonText": "Start Over",
       "fields": []
     }
   ]

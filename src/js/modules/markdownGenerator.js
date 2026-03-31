@@ -22,7 +22,7 @@ export function generateMarkdown() {
   let sectionNumber = 1;
 
   for (const page of formConfig.pages) {
-    if (page.isSummary) {
+    if (page.isSummary || page.isLanding) {
       continue;
     }
 

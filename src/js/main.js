@@ -3,7 +3,18 @@ import { initNavigation } from './modules/navigation.js';
 import { hasAnyValues } from './modules/stateManager.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadFormConfig();
+  const container = document.getElementById('form-container');
+  if (container) {
+    container.innerHTML =
+      '<div style="text-align:center;padding:3rem;color:#6b6560;">Loading...</div>';
+  }
+
+  try {
+    await loadFormConfig();
+  } catch {
+    return;
+  }
+
   const formConfig = getFormConfig();
 
   const titleEl = document.querySelector('.header-title');

@@ -45,6 +45,12 @@
   transform: scale(1.1);
 }
 
+.step-circle.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .step-circle.completed {
   background-color: var(--color-success);
   border-color: var(--color-success);

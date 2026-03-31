@@ -112,8 +112,47 @@
   position: relative;
 }
 
+.download-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  align-items: center;
+  position: relative;
+}
+
+.download-btn-group .btn {
+  min-width: 220px;
+  justify-content: center;
+}
+
+.btn-secondary-light {
+  background-color: rgb(255 255 255 / 15%);
+  color: var(--color-surface);
+  border: 1px solid rgb(255 255 255 / 30%);
+}
+
+.btn-secondary-light:hover {
+  background-color: rgb(255 255 255 / 25%);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
 .download-section .btn {
   position: relative;
-  font-size: var(--font-size-lg);
-  padding: 14px 36px;
+  padding: 12px 28px;
+}
+
+.start-over-btn {
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  opacity: 0.7;
+  border-color: rgb(255 255 255 / 20%);
+  color: var(--color-primary-light);
+}
+
+.start-over-btn:hover {
+  opacity: 1;
+  border-color: rgb(255 255 255 / 40%);
+  background-color: rgb(255 255 255 / 10%);
+  color: var(--color-surface);
 }
