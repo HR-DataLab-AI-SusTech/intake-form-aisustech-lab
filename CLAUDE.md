@@ -15,7 +15,7 @@ docker compose up     # Serve on localhost:8080
 ## Deployment
 
 - **Production**: GitHub Pages — auto-deployed via `.github/workflows/deploy-pages.yml` on push to `main`
-- **Live URL**: https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/
+- **Live URL**: https://hr-datalab-ai-sustech.github.io/general-pages-intakeform/
 - **Local**: `docker compose up` on localhost:8080
 
 ## Privacy

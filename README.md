@@ -1,6 +1,6 @@
 # AI SusTech Datalab Intake Form
 
-**[Live Site](https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/)**
+**[Live Site](https://hr-datalab-ai-sustech.github.io/general-pages-intakeform/)**
 
 A config-driven, multi-step intake form for the AI SusTech Datalab. Collects data & AI project requests through a guided questionnaire and exports the results as Markdown or CSV.
 
@@ -15,7 +15,7 @@ No database, no backend — just static HTML/CSS/JS deployed to GitHub Pages (or
 ### GitHub Pages (production)
 
 Pushes to `main` automatically deploy via GitHub Actions. The site is live at:
-https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/
+https://hr-datalab-ai-sustech.github.io/general-pages-intakeform/
 
 ### Using Docker (local development)
 
