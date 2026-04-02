@@ -1,10 +1,10 @@
 # AI SusTech Datalab Intake Form
 
-**[Live Demo](https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/)**
+**[Live Site](https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/)**
 
 A config-driven, multi-step intake form for the AI SusTech Datalab. Collects data & AI project requests through a guided questionnaire and exports the results as Markdown or CSV.
 
-No database, no backend — just static HTML/CSS/JS served via Docker or GitHub Pages.
+No database, no backend — just static HTML/CSS/JS deployed to GitHub Pages (or served locally via Docker).
 
 ![Landing Page](docs/frontpage_screenshot.jpeg)
 
@@ -12,7 +12,12 @@ No database, no backend — just static HTML/CSS/JS served via Docker or GitHub 
 
 ## Quick Start
 
-### Using Docker (recommended)
+### GitHub Pages (production)
+
+Pushes to `main` automatically deploy via GitHub Actions. The site is live at:
+https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/
+
+### Using Docker (local development)
 
 ```bash
 docker compose up --build
@@ -341,7 +346,9 @@ src/
     formConfig.json                  # All form content as JSON (edit this!)
   assets/
     favicon.svg                     # SVG favicon (AI monogram)
+    fonts/                          # Self-hosted Poppins woff2 files (privacy-safe)
   css/
+    fonts.css                       # @font-face declarations for Poppins
     reset.css                       # CSS reset
     variables.css                   # Design tokens (colors, fonts, spacing)
     layout.css                      # Page structure (header, main, footer)
@@ -365,6 +372,9 @@ src/
       downloadHandler.js            # Creates Blob and triggers file download
       summaryRenderer.js            # Review page with download + start over
       pageController.js             # Decoupled page navigation (avoids circular deps)
+.github/
+  workflows/
+    deploy-pages.yml                # Auto-deploy to GitHub Pages on push to main
 docker/
   Dockerfile                        # nginx:alpine — works standalone or with compose
   nginx.conf                        # Static file serving config
@@ -379,7 +389,9 @@ docker-compose.yml                  # Mounts src/ as volume on port 8080
 - **Browser history** — Each page pushes a readable hash to the URL (e.g. `#use-case-description`). Back/forward buttons work. Direct links to specific pages work.
 - **Step validation** — Users can only navigate to pages they've already visited via the step indicator. The Next button validates required fields before advancing.
 - **CSS custom properties** — All colors, fonts, and spacing are defined as variables in `variables.css`. Rebranding requires editing only that file.
+- **Self-hosted fonts** — Poppins (the HR corporate font) is served from `src/assets/fonts/`. No external requests to Google Fonts or other CDNs.
 - **Accessibility** — ARIA labels, `aria-describedby` on error fields, visually-hidden fieldset legends, `prefers-reduced-motion` support, keyboard-navigable step indicator.
+- **CI/CD** — GitHub Actions workflow auto-deploys to GitHub Pages on every push to `main`.
 
 ## Theming
 
@@ -392,7 +404,7 @@ To change the visual appearance, edit `src/css/variables.css`:
   --color-success: #5a8a3c;       /* Download button, completed steps */
   --color-bg: #f7f4ef;            /* Page background */
   --color-surface: #fff;          /* Card / form background */
-  --font-display: 'DM Serif Display', georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
 }
 ```

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Config-driven multi-step intake form for the AI SusTech Datalab. Vanilla HTML/CSS/JS, no framework, no build step. Served via Docker (nginx). Form content is defined in `src/config/formConfig.json`.
+Config-driven multi-step intake form for the AI SusTech Datalab. Vanilla HTML/CSS/JS, no framework, no build step. Deployed to GitHub Pages via GitHub Actions; can also be served locally via Docker (nginx). Form content is defined in `src/config/formConfig.json`.
 
 ## Key Commands
 
@@ -11,6 +11,18 @@ npm run lint          # ESLint + Stylelint + HTMLHint
 npm run format        # Prettier
 docker compose up     # Serve on localhost:8080
 ```
+
+## Deployment
+
+- **Production**: GitHub Pages — auto-deployed via `.github/workflows/deploy-pages.yml` on push to `main`
+- **Live URL**: https://hr-datalab-ai-sustech.github.io/intake-form-aisustech-lab/
+- **Local**: `docker compose up` on localhost:8080
+
+## Privacy
+
+- No external CDN requests (fonts are self-hosted)
+- No analytics, tracking, or third-party scripts
+- Form data stays in the browser (`sessionStorage`) — never sent to a server
 
 ## Architecture
 
@@ -29,8 +41,7 @@ docker compose up     # Serve on localhost:8080
 - Muted green: #5a8a3c (CTA, success)
 - Warm cream: #f7f4ef (background)
 - Sand borders: #d9d3ca
-- Display font: DM Serif Display
-- Body font: DM Sans
+- Font: Poppins (self-hosted, no Google Fonts — privacy-safe)
 
 ## Frontend Design Skill
 
@@ -39,7 +50,7 @@ This skill guides creation of distinctive, production-grade frontend interfaces 
 ### Design Direction: Editorial/Magazine
 
 The current design uses an editorial aesthetic with:
-- Serif + sans-serif font pairing (DM Serif Display + DM Sans)
+- Poppins font family (self-hosted, HR corporate font)
 - Dominant dark teal with burgundy accents
 - Warm cream backgrounds with subtle grain texture
 - Staggered animations on page transitions
@@ -47,7 +58,7 @@ The current design uses an editorial aesthetic with:
 
 ### Guidelines
 
-- **Typography**: Distinctive font pairings. Never default to Arial, Inter, or system fonts.
+- **Typography**: Use Poppins (self-hosted). Never load fonts from external CDNs (privacy requirement).
 - **Color**: Dominant color with sharp accents. Use CSS variables.
 - **Motion**: Staggered reveals on page load. CSS-only where possible.
 - **Spatial**: Generous whitespace. Card-based layout with shadows and rounded corners.
