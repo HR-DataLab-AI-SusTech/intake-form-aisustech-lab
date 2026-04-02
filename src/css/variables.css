@@ -21,8 +21,8 @@
   --color-border-focus: #0a3049;
 
   /* Typography */
-  --font-display: 'DM Serif Display', georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Poppins', system-ui, sans-serif;
+  --font-body: 'Poppins', system-ui, sans-serif;
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
