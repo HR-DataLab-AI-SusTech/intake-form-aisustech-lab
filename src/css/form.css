@@ -138,7 +138,7 @@
   padding: var(--spacing-md);
   border: 2px solid var(--color-border);
   border-radius: var(--border-radius-sm);
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   font-size: var(--font-size-base);
   transition:
     border-color var(--transition-fast),
@@ -202,7 +202,7 @@
     background-color var(--transition-fast),
     border-color var(--transition-fast),
     transform var(--transition-fast);
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
 .radio-option:hover {
@@ -268,7 +268,7 @@
     background-color var(--transition-fast),
     border-color var(--transition-fast),
     transform var(--transition-fast);
-  background: var(--color-bg);
+  background: var(--color-surface);
 }
 
 .checkbox-option:hover {
@@ -320,7 +320,7 @@
   padding: var(--spacing-md);
   border: 2px solid var(--color-border);
   border-radius: var(--border-radius-sm);
-  background-color: var(--color-bg);
+  background-color: var(--color-surface);
   font-size: var(--font-size-base);
   outline: none;
   cursor: pointer;

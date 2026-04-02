@@ -70,12 +70,20 @@
 
 /* Form navigation */
 .form-navigation {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   margin-top: var(--spacing-2xl);
   padding-top: var(--spacing-xl);
   border-top: 2px solid var(--color-bg);
+}
+
+.form-navigation > :first-child {
+  justify-self: start;
+}
+
+.form-navigation > :last-child {
+  justify-self: end;
 }
 
 /* Buttons */

@@ -166,10 +166,9 @@ function renderCurrentPage() {
 function updateButtons(index) {
   const formConfig = getFormConfig();
   const page = formConfig.pages[index];
-  const isFirstForm = index === 0 || (index === 1 && formConfig.pages[0].isLanding);
   const isLast = index === totalPages - 1;
 
-  btnPrev.classList.toggle('btn-hidden', isFirstForm || page.isLanding);
+  btnPrev.classList.toggle('btn-hidden', page.isLanding);
   btnPrev.textContent = `\u2190 ${formConfig.prevButtonText || 'Previous'}`;
 
   if (isLast) {

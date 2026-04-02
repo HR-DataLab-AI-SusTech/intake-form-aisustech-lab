@@ -4,7 +4,7 @@
 
 /* Hero */
 .landing-hero {
-  text-align: center;
+  text-align: left;
   padding: var(--spacing-2xl) 0 var(--spacing-xl);
 }
 
@@ -42,7 +42,7 @@
   font-size: var(--font-size-base);
   color: var(--color-text-muted);
   max-width: 540px;
-  margin: 0 auto;
+  margin: 0;
   line-height: 1.8;
 }
 
@@ -130,7 +130,7 @@
 
 /* CTA */
 .landing-cta {
-  text-align: center;
+  text-align: left;
   padding-top: var(--spacing-md);
   padding-bottom: var(--spacing-lg);
 }
